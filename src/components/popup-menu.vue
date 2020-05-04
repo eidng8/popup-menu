@@ -26,7 +26,7 @@
         </div>
       </div>
       <div class="g8-menu__sub-menu" v-if="item[childrenKey]">
-        &gt;
+        &#10093;
       </div>
     </li>
   </ul>
