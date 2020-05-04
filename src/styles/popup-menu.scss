@@ -8,6 +8,7 @@
 
 .g8-menu {
   margin: 0;
+  display: table;
   padding: 0 0.5em;
   text-align: left;
   user-select: none;
@@ -15,32 +16,43 @@
   ul,
   li {
     margin: 0;
-    padding: 0.25em 0;
     list-style: none;
   }
 
   li {
-    display: flex;
+    display: table-row;
     align-items: center;
-    border-bottom: solid 1px $g8-menu__border;
 
-    &:before {
-      content: '\2610';
-      visibility: hidden;
+    &:before,
+    &:after,
+    > * {
+      display: table-cell;
+      vertical-align: middle;
     }
 
-    &.g8-menu__item--checked:before {
+    &:before,
+    &:after {
+      content: ' ';
+      max-width: 1em;
+    }
+
+    &.g8-menu__checker:before {
+      content: '\2610';
+    }
+
+    &.g8-menu__checker--checked:before {
       content: '\2611';
-      visibility: visible;
+    }
+
+    &.g8-menu--has-child:after {
+      content: '\276D';
     }
 
     > * {
-      padding-left: 0.5em;
+      width: 100%;
+      padding: 0.5em 0 0.5em 0.5em;
+      border-bottom: solid 1px $g8-menu__border;
     }
-  }
-
-  &.g8-menu--use-checker li:before {
-    visibility: visible;
   }
 }
 

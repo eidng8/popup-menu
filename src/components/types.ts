@@ -12,6 +12,12 @@ export interface G8MenuItem {
   label: string;
   subtitle?: string;
   hint?: string;
+  checker?: boolean;
+  checked?: boolean;
   shortcut?: string;
   children?: G8MenuItem[];
+}
+
+export class G8MenuItemClicked extends Event {
+  data?: G8MenuItem;
 }

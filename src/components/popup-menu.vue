@@ -10,8 +10,12 @@
       v-for="(item, idx) in items"
       :key="idx"
       :id="item[idKey]"
-      :class="{ 'g8-menu__item--checked': checked }"
-      @click="clicked($event)"
+      :class="{
+        'g8-menu__checker': item[checkerKey],
+        'g8-menu__checker--checked': item[checkedKey],
+        'g8-menu--has-child': item[childrenKey] && item[childrenKey].length,
+      }"
+      @click="clicked(item, $event)"
     >
       <div class="g8-menu__item">
         <div class="g8-menu__label">
@@ -25,16 +29,13 @@
           </slot>
         </div>
       </div>
-      <div class="g8-menu__sub-menu" v-if="item[childrenKey]">
-        &#10093;
-      </div>
     </li>
   </ul>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { G8MenuItem } from './types';
+import { G8MenuItem, G8MenuItemClicked } from './types';
 
 /**
  * A tree view component with stable DOM structure. Stable means its structure
@@ -47,69 +48,46 @@ import { G8MenuItem } from './types';
  */
 @Component({ name: 'g8-popup-menu' })
 export default class G8PopupMenu extends Vue {
-  /**
-   * Key of the field in `item` to be used as element's `id` attribute.
-   */
   @Prop({ default: 'id' }) idKey!: string;
 
-  /**
-   * Key of the field in `item` that holds node label.
-   */
   @Prop({ default: 'label' }) labelKey!: string;
 
-  /**
-   * Key of the field in `item` that holds node label.
-   */
   @Prop({ default: 'subtitle' }) subtitleKey!: string;
 
-  /**
-   * Key of the field in tags list of `item` that holds tag tooltip.
-   */
   @Prop({ default: 'hint' }) hintKey!: string;
 
-  /**
-   * Key of the field in `item` that holds node label.
-   */
+  @Prop({ default: 'checker' }) checkerKey!: string;
+
+  @Prop({ default: 'checked' }) checkedKey!: string;
+
   @Prop({ default: 'shortcut' }) shortcutKey!: string;
 
-  /**
-   * Key of the field in `item` that holds child nodes array.
-   */
   @Prop({ default: 'children' }) childrenKey!: string;
 
-  /**
-   * Whether to add a checkbox before each item, allowing multiple nodes to
-   * be checked.
-   */
   @Prop({ default: false }) checker!: boolean;
 
-  /**
-   * The menu item data to be rendered. Please note that the `checked` field
-   * ***may*** be mutated by this component to reflect its states.
-   */
   @Prop() items!: G8MenuItem[];
-
-  /**
-   * Whether the node is checked. This must be a member field in order for
-   * binding to work.
-   */
-  checked = false;
 
   /**
    * Handles the click event of checkboxes. Sets whether the current node is
    * checked. Also set propagates the state to all immediate children.
    * This method emits the `state-changed` event.
    */
-  setState(): void {
-    this.$emit('state-changed');
+  setState(item: G8MenuItem): void {
+    if (!item[this.checkerKey]) return;
+    item[this.checkedKey] = !item[this.checkedKey];
   }
 
   /**
    * Handles click event of nodes, expanding/collapsing sub-tree if
    * applicable. This method emits the `click` event.
    */
-  clicked(evt: Event): void {
-    this.$emit('click');
+  clicked(item: G8MenuItem, evt: G8MenuItemClicked): void {
+    if (evt.defaultPrevented) return;
+    this.setState(item);
+    evt.data = item;
+    this.$emit('click', evt);
+    this.$forceUpdate();
   }
 }
 </script>

@@ -10,15 +10,10 @@
       <label>Dark theme</label>
       <input type="checkbox" v-model="dark" />
     </div>
-    <div>
-      <label>Use checker</label>
-      <input type="checkbox" v-model="checker" />
-    </div>
     <g8-popup-menu
       class="g8-menu"
       :items="items"
-      :checker="checker"
-      :class="{ 'g8--dark': dark, 'g8-menu--use-checker': checker }"
+      :class="{ 'g8--dark': dark }"
     />
   </div>
 </template>
@@ -33,21 +28,20 @@ export default class App extends Vue {
 
   dark = true;
 
-  checker = true;
-
   // noinspection JSUnusedGlobalSymbols
   created(): void {
-    this.items = this.generateItems(5);
+    this.items = this.generateItems(5, '', true);
     this.items[1].children = this.generateItems(5, '1.');
   }
 
-  generateItems(num: number, prefix = ''): G8MenuItem[] {
+  generateItems(num: number, prefix = '', checker = false): G8MenuItem[] {
     const items = [] as G8MenuItem[];
     for (let idx = 0; idx < num; idx++) {
       items.push({
         label: `item ${prefix}${idx}`,
         subtitle: `subtitle ${prefix}${idx}`,
         hint: `hint ${prefix}${idx}`,
+        checker: checker && !(idx % 3),
         shortcutKey: String.fromCharCode(97 + idx),
       });
     }
