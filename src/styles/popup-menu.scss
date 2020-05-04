@@ -6,26 +6,41 @@
 
 @import './variables';
 
-.g8-menu,
-.g8-menu ul {
+.g8-menu {
   margin: 0;
-  padding: 0;
+  padding: 0 0.5em;
   text-align: left;
   user-select: none;
-  color: $g8-menu__fg;
 
-  > li {
-    padding-left: 0;
-    margin-left: 0;
+  ul,
+  li {
+    margin: 0;
+    padding: 0.25em 0;
+    list-style: none;
   }
-}
 
-.g8-menu__checker {
-  width: 1rem;
-  margin-right: 4px;
+  li {
+    display: flex;
+    align-items: center;
+    border-bottom: solid 1px $g8-menu__border;
 
-  &:before {
-    content: ' ';
+    &:before {
+      content: '\2610';
+      visibility: hidden;
+    }
+
+    &.g8-menu__item--checked:before {
+      content: '\2611';
+      visibility: visible;
+    }
+
+    > * {
+      padding-left: 0.5em;
+    }
+  }
+
+  &.g8-menu--use-checker li:before {
+    visibility: visible;
   }
 }
 

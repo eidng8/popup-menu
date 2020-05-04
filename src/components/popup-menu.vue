@@ -6,9 +6,14 @@
 
 <template>
   <ul v-if="items">
-    <li v-for="(item, idx) in items" :key="idx" :id="item[idKey]">
+    <li
+      v-for="(item, idx) in items"
+      :key="idx"
+      :id="item[idKey]"
+      :class="{ 'g8-menu__item--checked': checked }"
+      @click="clicked($event)"
+    >
       <div class="g8-menu__item">
-        <div class="g8-menu__checker" />
         <div class="g8-menu__label">
           <slot :item="item">
             <label :title="item[hintKey]">{{ item[labelKey] }}</label>
@@ -21,7 +26,7 @@
         </div>
       </div>
       <div class="g8-menu__sub-menu" v-if="item[childrenKey]">
-        <g8-popup-menu :items="item[childrenKey]" />
+        &gt;
       </div>
     </li>
   </ul>
@@ -103,7 +108,7 @@ export default class G8PopupMenu extends Vue {
    * Handles click event of nodes, expanding/collapsing sub-tree if
    * applicable. This method emits the `click` event.
    */
-  clicked(): void {
+  clicked(evt: Event): void {
     this.$emit('click');
   }
 }

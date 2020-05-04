@@ -10,10 +10,15 @@
       <label>Dark theme</label>
       <input type="checkbox" v-model="dark" />
     </div>
+    <div>
+      <label>Use checker</label>
+      <input type="checkbox" v-model="checker" />
+    </div>
     <g8-popup-menu
       class="g8-menu"
       :items="items"
-      :class="{ 'g8--dark': dark }"
+      :checker="checker"
+      :class="{ 'g8--dark': dark, 'g8-menu--use-checker': checker }"
     />
   </div>
 </template>
@@ -27,6 +32,8 @@ export default class App extends Vue {
   items!: G8MenuItem[];
 
   dark = true;
+
+  checker = true;
 
   // noinspection JSUnusedGlobalSymbols
   created(): void {
