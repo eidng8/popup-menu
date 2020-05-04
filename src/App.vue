@@ -10,11 +10,10 @@
       <label>Dark theme</label>
       <input type="checkbox" v-model="dark" />
     </div>
-    <g8-popup-menu
-      class="g8-menu"
-      :items="items"
-      :class="{ 'g8--dark': dark }"
-    />
+    <div id="click-me" @contextmenu.stop.prevent="show($event)">
+      Right click me
+    </div>
+    <g8-popup-menu class="g8-menu" :class="{ 'g8--dark': dark }" />
   </div>
 </template>
 
@@ -32,6 +31,10 @@ export default class App extends Vue {
   created(): void {
     this.items = this.generateItems(5, '', true);
     this.items[1].children = this.generateItems(5, '1.');
+  }
+
+  show(evt: MouseEvent): void {
+    (this.$children[0] as G8PopupMenu).open(this.items, evt);
   }
 
   generateItems(num: number, prefix = '', checker = false): G8MenuItem[] {
@@ -77,5 +80,15 @@ hr {
     color: #888;
     background: #333333;
   }
+}
+
+#click-me {
+  margin: 1em;
+  width: 90vw;
+  height: 50vh;
+  display: flex;
+  border: solid 1px;
+  align-items: center;
+  justify-content: center;
 }
 </style>

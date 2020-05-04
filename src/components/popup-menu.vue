@@ -96,7 +96,7 @@ export default class G8PopupMenu extends Vue {
 
   @Prop({ default: 'children' }) childrenKey!: string;
 
-  @Prop() items!: G8MenuItem[];
+  _items!: G8MenuItem[];
 
   p1 = [] as G8MenuItem[];
 
@@ -106,12 +106,28 @@ export default class G8PopupMenu extends Vue {
 
   pn = true;
 
-  // noinspection JSUnusedGlobalSymbols
-  created(): void {
-    this.p1 = this.items;
+  get items(): G8MenuItem[] {
+    return this._items;
   }
 
-  open(): void {
+  // noinspection JSUnusedGlobalSymbols
+  created(): void {
+    this.p1 = this._items;
+  }
+
+  open(items?: G8MenuItem[], evt?: MouseEvent): void {
+    if (items) this._items = items;
+    const sw = window.innerWidth;
+    const sh = window.innerHeight;
+    const mw = this.$el.scrollWidth;
+    const mh = this.$el.scrollHeight;
+    const x = Math.max(3, (evt && evt.screenX) || (sw - mw - 6) / 2);
+    const y = Math.max(3, (evt && evt.screenY) || (sh - mh - 6) / 2);
+    const el = this.$el as HTMLDivElement;
+    el.style.top = `${y}px`;
+    el.style.left = `${x}px`;
+    el.style.height = `${Math.min(sh - 3 - x, mh)}px`;
+    el.style.width = `${Math.min(sw - 3 - x, mw)}px`;
     this.$el.classList.remove('g8-menu--off');
   }
 
