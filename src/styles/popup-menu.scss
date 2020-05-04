@@ -13,13 +13,21 @@
   text-align: left;
   overflow: hidden;
   user-select: none;
+  border-radius: 3px;
+  white-space: nowrap;
   box-sizing: border-box;
   border: solid 1px $g8-menu__border;
+
+  button {
+    border: none;
+    background: transparent;
+  }
 
   ul,
   li {
     margin: 0;
     padding: 0;
+    width: 100%;
     list-style: none;
   }
 
@@ -75,6 +83,44 @@
   }
 }
 
+.g8-menu__header {
+  display: flex;
+  align-items: center;
+  margin-right: -0.5em;
+  justify-content: flex-end;
+}
+
+.g8-menu__close {
+  width: 1.5em;
+  height: 1.5em;
+  flex: 0 0 1.5em;
+  font-size: 1.5em;
+}
+
+.g8-menu__go-back {
+  border: none;
+  flex-grow: 1;
+  height: 1.5em;
+  text-align: right;
+  visibility: hidden;
+  color: $g8-menu__fg;
+  transform: scaleX(-1);
+  background: transparent;
+
+  &.g8-menu--can__go-back {
+    visibility: visible;
+  }
+}
+
+.g8-menu__page {
+  left: 0;
+  width: 100%;
+}
+
+.g8-menu--off {
+  display: none;
+}
+
 .g8-menu__label,
 .g8-menu__subtitle {
   display: block;
@@ -88,8 +134,16 @@
 .g8-menu.g8--dark {
   color: $g8-menu__fg--inverse;
 
+  button {
+    color: $g8-menu__fg--inverse;
+  }
+
   li:hover {
     background: $g8-menu__bg--highlight--inverse;
+  }
+
+  .g8-menu__go-back {
+    color: $g8-menu__fg--inverse;
   }
 
   .g8-menu__subtitle {
