@@ -23,6 +23,10 @@
     display: table-row;
     align-items: center;
 
+    &:hover {
+      background: $g8-menu__bg--highlight;
+    }
+
     &:before,
     &:after,
     > * {
@@ -56,6 +60,24 @@
   }
 }
 
+.g8-menu__label,
+.g8-menu__subtitle {
+  display: block;
+}
+
+.g8-menu__subtitle {
+  font-size: 0.7em;
+  color: $g8-menu__bg--secondary;
+}
+
 .g8-menu.g8--dark {
   color: $g8-menu__fg--inverse;
+
+  li:hover {
+    background: $g8-menu__bg--highlight--inverse;
+  }
+
+  .g8-menu__subtitle {
+    color: $g8-menu__bg--secondary--inverse;
+  }
 }

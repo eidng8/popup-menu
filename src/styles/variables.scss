@@ -7,13 +7,10 @@
 $g8-menu__bg: #cccccc !default;
 $g8-menu__fg: #333333 !default;
 $g8-menu__bg--highlight: lighten($g8-menu__bg, 10%) !default;
-$g8-menu__bg--highlight--secondary: darken($g8-menu__bg, 20%) !default;
+$g8-menu__bg--secondary: darken($g8-menu__bg, 20%) !default;
 $g8-menu__fg--inverse: darken($g8-menu__bg, 20%) !default;
 $g8-menu__bg--inverse: darken($g8-menu__fg, 5%) !default;
 $g8-menu__bg--highlight--inverse: lighten($g8-menu__bg--inverse, 10%) !default;
-$g8-menu__bg--highlight--secondary--inverse: lighten(
-  $g8-menu__bg--inverse,
-  20%
-) !default;
+$g8-menu__bg--secondary--inverse: lighten($g8-menu__bg--inverse, 30%) !default;
 
 $g8-menu__border: rgba(0, 0, 0, 0.5);
