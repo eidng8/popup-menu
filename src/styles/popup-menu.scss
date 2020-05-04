@@ -8,15 +8,23 @@
 
 .g8-menu {
   margin: 0;
-  display: table;
+  width: 100%;
   padding: 0 0.5em;
   text-align: left;
+  overflow: hidden;
   user-select: none;
+  box-sizing: border-box;
+  border: solid 1px $g8-menu__border;
 
   ul,
   li {
     margin: 0;
+    padding: 0;
     list-style: none;
+  }
+
+  ul {
+    display: table;
   }
 
   li {
@@ -52,10 +60,17 @@
       content: '\276D';
     }
 
+    &:not(:last-child) > * {
+      border-bottom: solid 1px $g8-menu__border;
+    }
+
     > * {
       width: 100%;
       padding: 0.5em 0 0.5em 0.5em;
-      border-bottom: solid 1px $g8-menu__border;
+    }
+
+    * {
+      box-sizing: border-box;
     }
   }
 }

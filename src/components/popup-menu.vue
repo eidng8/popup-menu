@@ -5,63 +5,56 @@
   -->
 
 <template>
-  <ul v-if="items">
-    <li
-      v-for="(item, idx) in p1"
-      :key="idx"
-      :id="item[idKey]"
-      :class="{
-        'g8-menu__checker': item[checkerKey],
-        'g8-menu__checker--checked': item[checkedKey],
-        'g8-menu--has-child': item[childrenKey] && item[childrenKey].length,
-      }"
-      @click="clicked(item, $event)"
+  <div v-if="items">
+    <g8-popup-menu-page
+      :id-key="idKey"
+      :label-key="labelKey"
+      :subtitle-key="subtitleKey"
+      :hint-key="hintKey"
+      :checked-key="checkedKey"
+      :checker-key="checkerKey"
+      :shortcut-key="shortcutKey"
+      :children-key="childrenKey"
+      :items="p1"
+      @click="clicked($event)"
     >
-      <div class="g8-menu__item">
-        <div class="g8-menu__label">
-          <slot :item="item">
-            <label :title="item[hintKey]">{{ item[labelKey] }}</label>
-          </slot>
-        </div>
-        <div class="g8-menu__subtitle">
-          <slot name="subtitle" :item="item">
-            <label>{{ item[subtitleKey] }}</label>
-          </slot>
-        </div>
-      </div>
-    </li>
-    <li
-      v-for="(item, idx) in p2"
-      :key="idx"
-      :id="item[idKey]"
-      :class="{
-        'g8-menu__checker': item[checkerKey],
-        'g8-menu__checker--checked': item[checkedKey],
-        'g8-menu--has-child': item[childrenKey] && item[childrenKey].length,
-      }"
-      @click="clicked(item, $event)"
+      <template
+        v-for="name in Object.keys($scopedSlots)"
+        :slot="name"
+        slot-scope="slotData"
+      >
+        <slot :name="name" v-bind="slotData" />
+      </template>
+    </g8-popup-menu-page>
+    <g8-popup-menu-page
+      :id-key="idKey"
+      :label-key="labelKey"
+      :subtitle-key="subtitleKey"
+      :hint-key="hintKey"
+      :checked-key="checkedKey"
+      :checker-key="checkedKey"
+      :shortcut-key="shortcutKey"
+      :children-key="childrenKey"
+      :items="p2"
+      @click="clicked($event)"
     >
-      <div class="g8-menu__item">
-        <div class="g8-menu__label">
-          <slot :item="item">
-            <label :title="item[hintKey]">{{ item[labelKey] }}</label>
-          </slot>
-        </div>
-        <div class="g8-menu__subtitle">
-          <slot name="subtitle" :item="item">
-            <label>{{ item[subtitleKey] }}</label>
-          </slot>
-        </div>
-      </div>
-    </li>
-  </ul>
+      <template
+        v-for="name in Object.keys($scopedSlots)"
+        :slot="name"
+        slot-scope="slotData"
+      >
+        <slot :name="name" v-bind="slotData" />
+      </template>
+    </g8-popup-menu-page>
+  </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { G8MenuItem, G8MenuItemClicked } from './types';
+import G8PopupMenuPage from './popup-menu-page.vue';
 
-@Component({ name: 'g8-popup-menu' })
+@Component({ name: 'g8-popup-menu', components: { G8PopupMenuPage } })
 export default class G8PopupMenu extends Vue {
   @Prop({ default: 'id' }) idKey!: string;
 
@@ -79,37 +72,38 @@ export default class G8PopupMenu extends Vue {
 
   @Prop({ default: 'children' }) childrenKey!: string;
 
-  @Prop({ default: false }) checker!: boolean;
-
   @Prop() items!: G8MenuItem[];
 
   p1 = [] as G8MenuItem[];
 
   p2 = [] as G8MenuItem[];
 
-  path = [] as string[];
+  path = [] as G8MenuItem[][];
+
+  pn = true;
 
   created(): void {
     this.p1 = this.items;
   }
 
-  clicked(item: G8MenuItem, evt: G8MenuItemClicked): void {
+  clicked(evt: G8MenuItemClicked): void {
     if (evt.defaultPrevented) return;
-    this.setState(item);
-    evt.data = item;
     this.$emit('click', evt);
+    this.push();
     this.$forceUpdate();
   }
 
-  setState(item: G8MenuItem): void {
-    if (!item[this.checkerKey]) return;
-    item[this.checkedKey] = !item[this.checkedKey];
+  push(): void {
+    if (this.pn) this.path.push(this.p1);
+    else this.path.push(this.p2);
+    this.pn = !this.pn;
   }
-
-  push(): void {}
 
   pop(): void {
     if (!this.path.length) return;
+    if (this.pn) this.p2 = this.path.pop()!;
+    else this.p1 = this.path.pop()!;
+    this.pn = !this.pn;
   }
 }
 </script>
