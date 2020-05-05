@@ -74,7 +74,7 @@ export default class G8PopupMenu extends Vue {
 
   // noinspection JSUnusedGlobalSymbols
   mounted(): void {
-    this.close();
+    this.$el.classList.add('g8-menu--off');
   }
 
   open(items?: G8MenuItem[], evt?: MouseEvent): void {
@@ -102,6 +102,9 @@ export default class G8PopupMenu extends Vue {
   }
 
   close(): void {
+    this.page = this.items;
+    this.page = [];
+    this.header = '';
     this.$el.classList.add('g8-menu--off');
     this.$emit('close');
   }
