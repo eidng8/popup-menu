@@ -49,7 +49,7 @@ export default class App extends Vue {
   // noinspection JSUnusedGlobalSymbols
   created(): void {
     this.items = this.generateItems(5, '', true);
-    this.items[1].children = this.generateItems(5, '1.');
+    this.items[1].children = this.generateItems(10, '1.');
   }
 
   show(evt: MouseEvent): void {
@@ -60,7 +60,7 @@ export default class App extends Vue {
     const items = [] as G8MenuItem[];
     for (let idx = 0; idx < num; idx++) {
       items.push({
-        label: `item ${prefix}${idx}`,
+        label: `item ${prefix}${idx} `,
         subtitle: `subtitle ${prefix}${idx}`,
         hint: `hint ${prefix}${idx}`,
         checker: checker && !(idx % 3),

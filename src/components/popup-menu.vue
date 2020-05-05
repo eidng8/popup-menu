@@ -70,6 +70,8 @@ export default class G8PopupMenu extends Vue {
 
   page = [] as G8MenuItem[];
 
+  anchor = { x: 0, y: 0 };
+
   path = [] as { header: string; items: G8MenuItem[] }[];
 
   // noinspection JSUnusedGlobalSymbols
@@ -77,28 +79,12 @@ export default class G8PopupMenu extends Vue {
     this.$el.classList.add('g8-menu--off');
   }
 
-  open(items?: G8MenuItem[], evt?: MouseEvent): void {
-    const margin = 3;
-    if (items) this.page = this.items = items;
+  open(items: G8MenuItem[], evt?: MouseEvent): void {
+    this.page = this.items = items;
+    this.anchor = evt ? { x: evt.clientX, y: evt.clientY } : { x: 0, y: 0 };
+    this.$el.classList.remove('g8-menu--off');
     this.$emit('open', evt);
-    this.$nextTick(() => {
-      this.$el.classList.remove('g8-menu--off');
-      const el = this.$el.children[0] as HTMLDivElement;
-      const sw = window.innerWidth;
-      const sh = window.innerHeight;
-      const mw = el.scrollWidth;
-      const mh = el.scrollHeight;
-      let x = margin;
-      let y = margin;
-      if (evt) {
-        x = Math.max(margin, evt.clientX || 0);
-        y = Math.max(margin, evt.clientY || 0);
-      }
-      if (x + mw + margin > sw) x = Math.max(margin, sw - mw - margin);
-      if (y + mh + margin > sh) y = Math.max(margin, sh - mh - margin);
-      el.style.top = `${y}px`;
-      el.style.left = `${x}px`;
-    });
+    this.resize();
   }
 
   close(): void {
@@ -106,7 +92,41 @@ export default class G8PopupMenu extends Vue {
     this.page = [];
     this.header = '';
     this.$el.classList.add('g8-menu--off');
+    const el = this.$el.children[0] as HTMLDivElement;
+    el.style.left = '';
+    el.style.width = '';
+    el.style.height = '';
+    el.style.top = '';
     this.$emit('close');
+  }
+
+  resize(): void {
+    const el = this.$el.children[0] as HTMLDivElement;
+    el.style.left = '';
+    el.style.width = '';
+    el.style.height = '';
+    el.style.top = '';
+    this.$nextTick(() => {
+      const margin = 3;
+      let x = Math.max(margin, this.anchor.x);
+      let y = Math.max(margin, this.anchor.y);
+      const sw = window.innerWidth;
+      const sh = window.innerHeight;
+      let width = el.scrollWidth;
+      let height = el.scrollHeight;
+      if (x + width + margin > sw) {
+        x = Math.max(margin, sw - width - margin);
+        width = sw - x - margin;
+      }
+      el.style.left = `${x}px`;
+      el.style.width = `${width}px`;
+      if (y + height + margin > sh) {
+        y = Math.max(margin, sh - height - margin);
+        height = sh - y - margin;
+      }
+      el.style.height = `${height + 2}px`;
+      el.style.top = `${y}px`;
+    });
   }
 
   clicked(evt: G8MenuItemClicked): void {
@@ -128,12 +148,11 @@ export default class G8PopupMenu extends Vue {
     this.pop();
   }
 
-  push(item?: G8MenuItem): void {
-    if (item && item.children) {
-      this.path.push({ header: this.header, items: this.page });
-      this.page = item[this.childrenKey] as G8MenuItem[];
-      this.header = (item[this.idKey] || item[this.labelKey] || '') as string;
-    }
+  push(item: G8MenuItem): void {
+    this.path.push({ header: this.header, items: this.page });
+    this.page = item[this.childrenKey] as G8MenuItem[];
+    this.header = (item[this.idKey] || item[this.labelKey] || '') as string;
+    this.resize();
   }
 
   pop(): void {
@@ -141,6 +160,7 @@ export default class G8PopupMenu extends Vue {
     const page = this.path.pop()!;
     this.page = page.items;
     this.header = page.header;
+    this.resize();
   }
 }
 </script>
