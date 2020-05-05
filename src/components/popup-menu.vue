@@ -80,6 +80,7 @@ export default class G8PopupMenu extends Vue {
   open(items?: G8MenuItem[], evt?: MouseEvent): void {
     const margin = 3;
     if (items) this.page = this.items = items;
+    this.$emit('open', evt);
     this.$nextTick(() => {
       this.$el.classList.remove('g8-menu--off');
       const el = this.$el.children[0] as HTMLDivElement;
@@ -108,12 +109,16 @@ export default class G8PopupMenu extends Vue {
   clicked(evt: G8MenuItemClicked): void {
     if (evt.defaultPrevented) return;
     this.$emit('click', evt);
-    if (evt.data && evt.data.children && evt.data.children.length) {
-      this.push(evt.data);
-    } else {
-      this.$emit('select', evt.data);
+    if (evt.data) {
+      if (evt.data.children && evt.data.children.length) {
+        this.push(evt.data);
+      } else if (evt.data.checker) {
+        this.$emit('state-changed', evt.data);
+      } else {
+        this.$emit('select', evt.data);
+        this.close();
+      }
     }
-    // this.$forceUpdate();
   }
 
   back(): void {
