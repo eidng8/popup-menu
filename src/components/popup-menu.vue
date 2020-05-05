@@ -1,19 +1,19 @@
 <!--
   - GPLv3 https://www.gnu.org/licenses/gpl-3.0.en.html
   -
-  - Author: eidng8
+  - author: eidng8
   -->
 
 <template>
-  <div v-if="items">
+  <div @click.self.stop.prevent="close()" @contextmenu.stop.prevent="close()">
     <div class="g8-menu__page">
       <div class="g8-menu__header">
         <button
           class="g8-menu__go-back"
-          :class="{ 'g8-menu--can__go-back': path.length }"
+          :class="{ 'g8-menu--can__go-back': header }"
           @click="back()"
         >
-          &#10148;
+          {{ header }}
         </button>
         <button class="g8-menu__close" @click="close()">&#215;</button>
       </div>
@@ -26,39 +26,7 @@
         :checker-key="checkerKey"
         :shortcut-key="shortcutKey"
         :children-key="childrenKey"
-        :items="p1"
-        @click="clicked($event)"
-      >
-        <template
-          v-for="name in Object.keys($scopedSlots)"
-          :slot="name"
-          slot-scope="slotData"
-        >
-          <slot :name="name" v-bind="slotData" />
-        </template>
-      </g8-popup-menu-page>
-    </div>
-    <div class="g8-menu__page g8-menu--off">
-      <div class="g8-menu__header">
-        <button
-          class="g8-menu__go-back"
-          :class="{ 'g8-menu--can__go-back': path.length }"
-          @click="back()"
-        >
-          &#10148;
-        </button>
-        <button class="g8-menu__close" @click="close()">&#215;</button>
-      </div>
-      <g8-popup-menu-page
-        :id-key="idKey"
-        :label-key="labelKey"
-        :subtitle-key="subtitleKey"
-        :hint-key="hintKey"
-        :checked-key="checkedKey"
-        :checker-key="checkedKey"
-        :shortcut-key="shortcutKey"
-        :children-key="childrenKey"
-        :items="p2"
+        :items="page"
         @click="clicked($event)"
       >
         <template
@@ -96,43 +64,45 @@ export default class G8PopupMenu extends Vue {
 
   @Prop({ default: 'children' }) childrenKey!: string;
 
-  _items!: G8MenuItem[];
+  items!: G8MenuItem[];
 
-  p1 = [] as G8MenuItem[];
+  header = '';
 
-  p2 = [] as G8MenuItem[];
+  page = [] as G8MenuItem[];
 
-  path = [] as G8MenuItem[][];
-
-  pn = true;
-
-  get items(): G8MenuItem[] {
-    return this._items;
-  }
+  path = [] as { header: string; items: G8MenuItem[] }[];
 
   // noinspection JSUnusedGlobalSymbols
-  created(): void {
-    this.p1 = this._items;
+  mounted(): void {
+    this.close();
   }
 
   open(items?: G8MenuItem[], evt?: MouseEvent): void {
-    if (items) this._items = items;
-    const sw = window.innerWidth;
-    const sh = window.innerHeight;
-    const mw = this.$el.scrollWidth;
-    const mh = this.$el.scrollHeight;
-    const x = Math.max(3, (evt && evt.screenX) || (sw - mw - 6) / 2);
-    const y = Math.max(3, (evt && evt.screenY) || (sh - mh - 6) / 2);
-    const el = this.$el as HTMLDivElement;
-    el.style.top = `${y}px`;
-    el.style.left = `${x}px`;
-    el.style.height = `${Math.min(sh - 3 - x, mh)}px`;
-    el.style.width = `${Math.min(sw - 3 - x, mw)}px`;
-    this.$el.classList.remove('g8-menu--off');
+    const margin = 3;
+    if (items) this.page = this.items = items;
+    this.$nextTick(() => {
+      this.$el.classList.remove('g8-menu--off');
+      const el = this.$el.children[0] as HTMLDivElement;
+      const sw = window.innerWidth;
+      const sh = window.innerHeight;
+      const mw = el.scrollWidth;
+      const mh = el.scrollHeight;
+      let x = margin;
+      let y = margin;
+      if (evt) {
+        x = Math.max(margin, evt.clientX || 0);
+        y = Math.max(margin, evt.clientY || 0);
+      }
+      if (x + mw + margin > sw) x = Math.max(margin, sw - mw - margin);
+      if (y + mh + margin > sh) y = Math.max(margin, sh - mh - margin);
+      el.style.top = `${y}px`;
+      el.style.left = `${x}px`;
+    });
   }
 
   close(): void {
     this.$el.classList.add('g8-menu--off');
+    this.$emit('close');
   }
 
   clicked(evt: G8MenuItemClicked): void {
@@ -152,36 +122,17 @@ export default class G8PopupMenu extends Vue {
 
   push(item?: G8MenuItem): void {
     if (item && item.children) {
-      const pages = (this.$el.children as unknown) as HTMLDivElement[];
-      if (this.pn) {
-        this.path.push(this.p1);
-        this.p2 = item.children;
-        pages[0].classList.add('g8-menu--off');
-        pages[1].classList.remove('g8-menu--off');
-      } else {
-        this.path.push(this.p2);
-        this.p1 = item.children;
-        pages[1].classList.add('g8-menu--off');
-        pages[0].classList.remove('g8-menu--off');
-      }
-      this.pn = !this.pn;
+      this.path.push({ header: this.header, items: this.page });
+      this.page = item[this.childrenKey] as G8MenuItem[];
+      this.header = (item[this.idKey] || item[this.labelKey] || '') as string;
     }
   }
 
   pop(): void {
     if (!this.path.length) return;
-    const last = this.path.pop()!;
-    const pages = (this.$el.children as unknown) as HTMLDivElement[];
-    if (this.pn) {
-      this.p2 = last;
-      pages[0].classList.add('g8-menu--off');
-      pages[1].classList.remove('g8-menu--off');
-    } else {
-      this.p1 = last;
-      pages[1].classList.add('g8-menu--off');
-      pages[0].classList.remove('g8-menu--off');
-    }
-    this.pn = !this.pn;
+    const page = this.path.pop()!;
+    this.page = page.items;
+    this.header = page.header;
   }
 }
 </script>

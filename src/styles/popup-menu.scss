@@ -1,23 +1,20 @@
 /*!
  * GPLv3 https://www.gnu.org/licenses/gpl-3.0.en.html
  *
- * Author: eidng8
+ * author: eidng8
  */
 
 @import './variables';
 
 .g8-menu {
-  margin: 0;
-  width: 100%;
-  padding: 0 0.5em;
-  text-align: left;
-  overflow: auto;
-  user-select: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
   position: absolute;
-  border-radius: 3px;
-  white-space: nowrap;
   box-sizing: border-box;
-  border: solid 1px $g8-menu__border;
+  background: transparent;
 
   button {
     border: none;
@@ -37,6 +34,7 @@
   }
 
   li {
+    cursor: pointer;
     display: table-row;
     align-items: center;
 
@@ -67,6 +65,8 @@
 
     &.g8-menu--has-child:after {
       content: '\276D';
+      padding-left: 0.25em;
+      padding-right: 0.25em;
     }
 
     &:not(:last-child) > * {
@@ -74,7 +74,7 @@
     }
 
     > * {
-      width: 100%;
+      min-width: 10em;
       padding: 0.5em 0 0.5em 0.5em;
     }
 
@@ -84,8 +84,21 @@
   }
 }
 
+.g8-menu__page {
+  left: 0;
+  overflow: auto;
+  padding: 0 0.25em;
+  position: absolute;
+  border-radius: 3px;
+  background: $g8-menu__bg;
+  max-width: calc(100% - 6px);
+  border: solid 1px $g8-menu__border;
+}
+
 .g8-menu__header {
+  width: 100%;
   display: flex;
+  overflow: hidden;
   align-items: center;
   margin-right: -0.5em;
   justify-content: flex-end;
@@ -95,18 +108,27 @@
   width: 1.5em;
   height: 1.5em;
   flex: 0 0 1.5em;
+  cursor: pointer;
   font-size: 1.5em;
+  margin-right: -0.25em;
 }
 
 .g8-menu__go-back {
   border: none;
   flex-grow: 1;
   height: 1.5em;
-  text-align: right;
+  outline: none;
+  cursor: pointer;
+  text-align: left;
   visibility: hidden;
   color: $g8-menu__fg;
-  transform: scaleX(-1);
   background: transparent;
+
+  &:before {
+    content: '\27A4';
+    transform: scaleX(-1);
+    display: inline-block;
+  }
 
   &.g8-menu--can__go-back {
     visibility: visible;
@@ -115,11 +137,6 @@
 
 .g8-menu--off {
   display: none !important;
-}
-
-.g8-menu__page {
-  left: 0;
-  width: 100%;
 }
 
 .g8-menu__label,
@@ -141,6 +158,10 @@
 
   li:hover {
     background: $g8-menu__bg--highlight--inverse;
+  }
+
+  .g8-menu__page {
+    background: $g8-menu__bg--inverse;
   }
 
   .g8-menu__go-back {

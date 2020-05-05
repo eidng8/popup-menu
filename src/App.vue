@@ -1,7 +1,7 @@
 <!--
   - GPLv3 https://www.gnu.org/licenses/gpl-3.0.en.html
   -
-  - Author: eidng8
+  - author: eidng8
   -->
 
 <template>
@@ -58,7 +58,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 
 hr {
@@ -70,8 +69,7 @@ hr {
 
 #app {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  overflow: auto;
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -85,10 +83,8 @@ hr {
 #click-me {
   margin: 1em;
   width: 90vw;
-  height: 50vh;
-  display: flex;
+  height: 2000px;
+  display: block;
   border: solid 1px;
-  align-items: center;
-  justify-content: center;
 }
 </style>
