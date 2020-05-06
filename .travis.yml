@@ -56,6 +56,8 @@ jobs:
     - stage: deploy
       os: linux
       script: skip
+      env:
+        secure: M6xkMLPDcedRjkMCcDO0QX9LBZbcXJBbsndvlxzi3TQ6UGkIxz+fLemPjo8lIerwdT6UdlQCCu3dm8aO3I30PrZsGa2jhpdL4S38uExFNEGq4h6oDb3qwet7x8yR7ha12ipf2yfQdV6VKGwdtZ4LNUOE3/nYsQVzgx/9PIF15NWdMPkHIsIpHzAkPcwyAqbrZGH186mV3Y1r300OlL43isw5lBxOu5St6AXKLBWcZ7FukG41QyjapKkN0Yym29aEp/+9fxUhbAzv6NL7aCScZwTzFeukP5fTPpZDpOMQNzEFaqEihGseNKxpv12bCMe4p/MBUtz/41KLFJVvym5K2PA8FxVN55Bfpw0KGzgY+tQf16mu7VFk+2/EJ9VBOHDPxpcv9l+G7Dic+kKeYoI35mXZjZVN38c7NW7dXwMJgDBaXCuCXCYs+NMgTyzHWkIYGHPnaryJpUN2b0fNFm3HbUReMRXIfRPrWVj7zsUOgoaWG74LhnKC6OSskNY5zZeDa+4Pz1DEIKUwgLGEy4D8RLQDxabuDXJRRa0Ccxn1bgZ1NJOmljY/SR70kaHhXiGRlA3+phv7ynxkCHP7PErxKBFFuIARAgkO9J68fGwYSlmtK9MeYBm7G5RuNWOD7zIA0wdXs0uaPrgu2PPXYdBmXEiOxUJ0O7+upamWIk9glAE=
       before_deploy:
         - npm install
         - npm install --no-save @bundle-analyzer/webpack-plugin
