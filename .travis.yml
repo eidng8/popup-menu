@@ -81,7 +81,7 @@ jobs:
         edge: true
         email: cheung.jackey@gmail.com
         api_token:
-          secure: NBPVxjDqy0tYwMCeeoZq/ntv+/aOdYpHWeuMXUjwE1BLbLlmwnfeSyBINoRQMs3wFWHInDVbcV7ZPMXR3cHDFl1gj2mH3DII5dQ/JeMKJW8mZE1FyZoUI9EIkoZQjPC6GrZ7CGCSvpHXXp/Il+vpQ5LHy4jkzGD0DWbPRM4BuK5qWIvlP6wQt9S+wjv4KpM4w0JeYLguYV6D5x5xlrg6DrG0UN7HfvHHif/0wxp1rdVxqKaFRGuEdGCHM5fWGanZO6bjvPYuh1Y9KxdigjGUvirzebxWzctjdwamzNwJDGmc82Frzr1rKCW/9+Bvw6CFJC/0vreYWRxfJzCdNDYpydm07sUunPLTf5gX48eQmO9NVGq7EnWiPTUwg6jc89f/b2MrysN8uZG8WSHcP6UGU8u6tHh98KTsi01Kn0SZGXZO3U0jsdx6+vp72OJbKDL5wMx8QkNUGWNXMROS2R7/D0r6mfAlAZx08Fbwdp/J3OTtCv8EsVEmLYbOQdNYGVC9SuTL8ITbQKxryRbTsEoq1kQ+6h/osNkUqqupA3ADjoxccz4uGl3+rB6xXCXubXb+oK3zir4bADgq81x2m7H3fg6s9Q7BDR3o0bc4w2bPQTDOEd+yfCvF/MXsZaxYhpEBEgVL8O3U87iMVY2Gj6m31dInMifIbmVYgIPjluU+F/E=
+          secure: QFHJkSZFUTO6+3bIXKY7ixzG6q6ZaoEnKMEGhxs6qg/iiHg4rRET12oin8KWJoadkCAo2fCB+WMQ5Ww3qcfjsb3HokWr7fYD79EWSLDNvVf19L9u4uB4hYR0obWPN++x8SxqWDvZ1UytHdir0GsaCpYuMtLFx2K1100R0EulL0hwbLU1qt4mLg5ttzgEKeg2P2pePMzGRstEiAp1rlG2ktWHfgr32MsQrnW9fsfM4GkD+zHMugN6WfDVGO4golahErFdA4Gec6tDat+EpGVA/5BdtBe1kGB0R2yplPlkZTlcu8JiV/QIfyzLHB2lTSTEDFUNmxjiuWnUOnHPkTNmJmicwdmw7p1+u3AuK6sT68QPknLYJnY0yUfkv8Hp+wh60uJzTLmNeuzLSpD1d7gzjMexY1D5UrdW2zK9QDsUHdnxyqnPbDBn2Ec4fABdQw9beCgd7BeHNsKUw0TZrUNrQSpzaYUkV9mxOpwt8gDr0LXm5WIu9Urh52F1pYwBbwWYAHRICUfQfBIFjtpYoWtMKZZyXBYBeYtbwyEv7tngEGGZaiYEbovAPWaz+fVRTw5w+t1/IqzVxxjm07HraMbP6vFK+9xpkUxlhSGlktx7R3IsFdJrZjeV4i64oIh/3NM6Y+reJTFqgcjR16fStog3UAjKfTDMZmo26dqa4+qJzgY=
         on:
           repo: eidng8/popup-menu
           branch: /Release-v\d+\.\d+\.\d+/
