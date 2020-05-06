@@ -10,7 +10,7 @@
       <div class="g8-menu__header">
         <button
           class="g8-menu__go-back"
-          :class="{ 'g8-menu--can__go-back': header }"
+          :class="{ 'g8-menu--can__go-back': path.length }"
           @click="back()"
         >
           {{ header }}
@@ -130,17 +130,14 @@ export default class G8PopupMenu extends Vue {
   }
 
   clicked(evt: G8MenuItemClicked): void {
-    if (evt.defaultPrevented) return;
     this.$emit('click', evt);
-    if (evt.data) {
-      if (evt.data.children && evt.data.children.length) {
-        this.push(evt.data);
-      } else if (evt.data.checker) {
-        this.$emit('state-changed', evt.data);
-      } else {
-        this.$emit('select', evt.data);
-        this.close();
-      }
+    if (evt.data!.children && evt.data!.children.length) {
+      this.push(evt.data!);
+    } else if (evt.data!.checker) {
+      this.$emit('state-changed', evt.data);
+    } else {
+      this.$emit('select', evt.data);
+      this.close();
     }
   }
 
@@ -151,7 +148,7 @@ export default class G8PopupMenu extends Vue {
   push(item: G8MenuItem): void {
     this.path.push({ header: this.header, items: this.page });
     this.page = item[this.childrenKey] as G8MenuItem[];
-    this.header = (item[this.idKey] || item[this.labelKey] || '') as string;
+    this.header = (item[this.labelKey] || item[this.idKey] || '') as string;
     this.resize();
   }
 

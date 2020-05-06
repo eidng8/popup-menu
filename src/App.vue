@@ -53,7 +53,8 @@ export default class App extends Vue {
   }
 
   show(evt: MouseEvent): void {
-    (this.$children[0] as G8PopupMenu).open(this.items, evt);
+    // eslint-disable-next-line
+    (this.$children[0] as any).open(this.items, evt);
   }
 
   generateItems(num: number, prefix = '', checker = false): G8MenuItem[] {

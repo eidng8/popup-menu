@@ -7,13 +7,15 @@
 <template>
   <ul v-if="items">
     <li
+      class="g8-menu__item"
       v-for="(item, idx) in items"
       :key="idx"
       :id="item[idKey]"
       :class="{
         'g8-menu__checker': item[checkerKey],
         'g8-menu__checker--checked': item[checkedKey],
-        'g8-menu--has-child': item[childrenKey] && item[childrenKey].length,
+        'g8-menu__item--has-child':
+          item[childrenKey] && item[childrenKey].length,
       }"
       @click="clicked(item, $event)"
     >
@@ -81,7 +83,6 @@ export default class G8PopupMenuPage extends Vue {
    * applicable. This method emits the `click` event.
    */
   clicked(item: G8MenuItem, evt: G8MenuItemClicked): void {
-    if (evt.defaultPrevented) return;
     this.setState(item);
     evt.data = item;
     this.$emit('click', evt);

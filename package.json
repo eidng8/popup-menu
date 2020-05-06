@@ -7,7 +7,7 @@
   "author": "eidng8",
   "license": "GPL-3.0",
   "main": "./dist/g8-popup-menu.umd.min.js",
-  "typings": "./typings/index.d.ts",
+  "typings": "./typings/",
   "files": [
     "/dist/*.js",
     "/dist/*.css",
