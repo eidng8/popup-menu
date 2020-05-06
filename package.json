@@ -13,6 +13,7 @@
     "/dist/*.css",
     "/src/index.ts",
     "/src/components",
+    "/src/styles",
     "/typings"
   ],
   "keywords": [
