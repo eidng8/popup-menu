@@ -39,15 +39,6 @@
 import { Component, Prop, Vue } from 'vue-property-decorator';
 import { G8MenuItem, G8MenuItemClicked } from './types';
 
-/**
- * A tree view component with stable DOM structure. Stable means its structure
- * will not change once rendered. This component uses CSS to toggle sub-tree.
- * To improve performance, sub-trees are not rendered until they are first
- * expanded. Once expanded, further collapse/expand action won't cause the
- * sub-tree to be rendered again. Currently there is an
- * [issue](https://github.com/eidng8/vue-tree/issues/24) about performance
- * problem of large tree data set.
- */
 @Component({ name: 'g8-popup-menu-page' })
 export default class G8PopupMenuPage extends Vue {
   @Prop({ default: 'id' }) idKey!: string;
