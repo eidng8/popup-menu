@@ -68,6 +68,7 @@ export default class App extends Vue {
         shortcutKey: String.fromCharCode(97 + idx),
       });
     }
+    items.splice(items.length / 2, 0, { label: '---' });
     return items;
   }
 }
