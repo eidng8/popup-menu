@@ -71,4 +71,19 @@ describe('g8-popup-menu events', () => {
     expect(emitted['state-changed'][0][0]).toBe(item);
     expect(item.checked).toBe(true);
   });
+
+  it('does not emit event on separator', async () => {
+    expect.assertions(2);
+    const wrapper = mount(G8PopupMenu);
+    const menu = wrapper.vm as any;
+    const item = { label: '---' } as G8MenuItem;
+    menu.open([item]);
+    await menu.$nextTick();
+    expect(wrapper.find('.g8-menu__separator').exists()).toBe(true);
+    wrapper.find('.g8-menu__separator').trigger('click');
+    await menu.$nextTick();
+    const emitted = wrapper.emitted();
+    delete emitted.open;
+    expect(Object.keys(emitted).length).toBe(0);
+  });
 });
