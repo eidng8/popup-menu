@@ -50,7 +50,7 @@ function updateReleaseNotes(log) {
   const note = path.resolve(path.join(__dirname, '../RELEASE.md'));
   const text = `# Vue-Tree v${version}
 
-A Vue tree view component with stable DOM structure.
+A Vue.js multi-level popup menu.
 Released under [GPLv3](https://www.gnu.org/licenses/gpl-3.0.en.html).
 
 
