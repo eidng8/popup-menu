@@ -88,8 +88,8 @@ export default class G8PopupMenu extends Vue {
   }
 
   close(): void {
-    this.page = this.items;
     this.page = [];
+    this.path = [];
     this.header = '';
     this.$el.classList.add('g8-menu--off');
     const el = this.$el.children[0] as HTMLDivElement;
