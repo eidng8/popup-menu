@@ -1,5 +1,7 @@
 # popup-menu
 
+[![master build](https://img.shields.io/travis/com/eidng8/popup-menu?color=333&logo=travis)](https://travis-ci.com/eidng8/popup-menu) [![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/eidng8/popup-menu?color=333&logo=snyk)](https://snyk.io/test/github/eidng8/popup-menu?targetFile=package.json) [![maintainability](https://img.shields.io/codeclimate/maintainability/eidng8/popup-menu?color=333&logo=code-climate)](https://codeclimate.com/github/eidng8/popup-menu/maintainability) [![master coverage](https://img.shields.io/coveralls/github/eidng8/popup-menu/master?color=333&logo=coveralls)](https://coveralls.io/github/eidng8/popup-menu?branch=master) [![dev build](https://img.shields.io/travis/com/eidng8/popup-menu/dev?color=333&label=dev%20build&logo=travis)](https://travis-ci.com/eidng8/popup-menu/tree/dev) [![dev coverage](https://img.shields.io/coveralls/github/eidng8/popup-menu/dev?color=333&label=dev%20coverage&logo=coveralls)](https://coveralls.io/github/eidng8/popup-menu?branch=dev)
+
 A Vue.js multi-level popup menu, using a page like navigation inside the menu container.
 
 [Demo](https://codesandbox.io/s/g8-popup-menu-demo-vq8i7?file=/src/components/HelloWorld.vue)
