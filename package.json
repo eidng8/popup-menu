@@ -1,6 +1,6 @@
 {
   "name": "g8-popup-menu",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Vue.js multi-level popup menu.",
   "repository": "git@github.com:eidng8/popup-menu.git",
   "bugs": "git@github.com:eidng8/popup-menu/issues",

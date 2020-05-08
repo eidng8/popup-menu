@@ -1,12 +1,16 @@
 # Changelog
 
-## [0.0.5](https://github.com/eidng8/popup-menu/tree/0.0.5) (2020-05-07 UTC)
+## [0.0.6](https://github.com/eidng8/popup-menu/tree/0.0.6) (2020-05-08 UTC)
 
-[Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.4...0.0.5)
+[Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.5...0.0.6)
 
 #### Implemented enhancements
 
-- support item separator [\#4](https://github.com/eidng8/popup-menu/issues/4)
+- add compact mode [\#9](https://github.com/eidng8/popup-menu/issues/9)
+
+## [Release-v0.0.5](https://github.com/eidng8/popup-menu/tree/Release-v0.0.5) (2020-05-07)
+
+[Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.4...Release-v0.0.5)
 
 #### Fixed bugs
 
@@ -15,6 +19,10 @@
 ## [Release-v0.0.4](https://github.com/eidng8/popup-menu/tree/Release-v0.0.4) (2020-05-07)
 
 [Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.3...Release-v0.0.4)
+
+#### Implemented enhancements
+
+- support item separator [\#4](https://github.com/eidng8/popup-menu/issues/4)
 
 #### Fixed bugs
 
