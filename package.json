@@ -46,7 +46,6 @@
     "vue-property-decorator": "^8.4.1"
   },
   "devDependencies": {
-    "@bundle-analyzer/webpack-plugin": "^0.5.1",
     "@types/jest": "^24.0.19",
     "@types/lodash": "^4.14.150",
     "@types/nightwatch": "^1.1.3",
