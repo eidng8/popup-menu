@@ -1,8 +1,16 @@
 # Changelog
 
-## [0.0.6](https://github.com/eidng8/popup-menu/tree/0.0.6) (2020-05-08 UTC)
+## [0.0.7](https://github.com/eidng8/popup-menu/tree/0.0.7) (2020-05-09 UTC)
 
-[Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.5...0.0.6)
+[Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.6...0.0.7)
+
+#### Implemented enhancements
+
+- add an prop to control whether to add element id to menu items [\#12](https://github.com/eidng8/popup-menu/issues/12)
+
+## [Release-v0.0.6](https://github.com/eidng8/popup-menu/tree/Release-v0.0.6) (2020-05-08)
+
+[Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.5...Release-v0.0.6)
 
 #### Implemented enhancements
 
@@ -12,6 +20,10 @@
 
 [Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.4...Release-v0.0.5)
 
+#### Implemented enhancements
+
+- support item separator [\#4](https://github.com/eidng8/popup-menu/issues/4)
+
 #### Fixed bugs
 
 - make sure text align left [\#7](https://github.com/eidng8/popup-menu/issues/7)
@@ -19,10 +31,6 @@
 ## [Release-v0.0.4](https://github.com/eidng8/popup-menu/tree/Release-v0.0.4) (2020-05-07)
 
 [Full Changelog](https://github.com/eidng8/popup-menu/compare/Release-v0.0.3...Release-v0.0.4)
-
-#### Implemented enhancements
-
-- support item separator [\#4](https://github.com/eidng8/popup-menu/issues/4)
 
 #### Fixed bugs
 
