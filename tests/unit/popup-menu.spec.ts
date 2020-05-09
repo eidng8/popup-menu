@@ -99,4 +99,22 @@ describe('g8-popup-menu', () => {
     await menu.$nextTick();
     expect(wrapper.find('.g8-menu--can__go-back').text()).toBe('');
   });
+
+  it('defaults to not adding element id', async () => {
+    expect.assertions(1);
+    const wrapper = mount(G8PopupMenu);
+    const menu = wrapper.vm as any;
+    menu.open([{ id: 'key', label: 'item label' }]);
+    await menu.$nextTick();
+    expect(wrapper.find('#key').exists()).toBe(false);
+  });
+
+  it('adds element id', async () => {
+    expect.assertions(1);
+    const wrapper = mount(G8PopupMenu, { propsData: { addElementId: true } });
+    const menu = wrapper.vm as any;
+    menu.open([{ id: 'key', label: 'item label' }]);
+    await menu.$nextTick();
+    expect(wrapper.find('#key').text()).toContain('item label');
+  });
 });

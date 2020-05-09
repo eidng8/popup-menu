@@ -26,6 +26,7 @@
         :checker-key="checkerKey"
         :shortcut-key="shortcutKey"
         :children-key="childrenKey"
+        :add-element-id="addElementId"
         :items="page"
         @click="clicked($event)"
       >
@@ -52,77 +53,82 @@ export default class G8PopupMenu extends Vue {
    * Field name in the menu item data set that holds item identifier. Defaults
    * to `'id'`.
    */
-  @Prop({ default: 'id' }) idKey!: string;
+  @Prop({ default: 'id' }) private idKey!: string;
 
   /**
    * Field name in the menu item data set that holds item label. Defaults to
    * `'label'`.
    */
-  @Prop({ default: 'label' }) labelKey!: string;
+  @Prop({ default: 'label' }) private labelKey!: string;
 
   /**
    * Field name in the menu item data set that holds item subtitle. Defaults to
    * `'subtitle'`.
    */
-  @Prop({ default: 'subtitle' }) subtitleKey!: string;
+  @Prop({ default: 'subtitle' }) private subtitleKey!: string;
 
   /**
    * Field name in the menu item data set that holds item tool tip. Defaults to
    * `'hint'`.
    */
-  @Prop({ default: 'hint' }) hintKey!: string;
+  @Prop({ default: 'hint' }) private hintKey!: string;
 
   /**
    * Field name in the menu item data set that tells whether the item has a
    * checkbox attached. Defaults to `'checker'`.
    */
-  @Prop({ default: 'checker' }) checkerKey!: string;
+  @Prop({ default: 'checker' }) private checkerKey!: string;
 
   /**
    * Field name in the menu item data set that holds item's checkbox is checked.
    * Defaults to `'checked'`.
    */
-  @Prop({ default: 'checked' }) checkedKey!: string;
+  @Prop({ default: 'checked' }) private checkedKey!: string;
 
   /**
    * Field name in the menu item data set that holds item keyboard shortcut.
    * Defaults to `'shortcut'`.
    */
-  @Prop({ default: 'shortcut' }) shortcutKey!: string;
+  @Prop({ default: 'shortcut' }) private shortcutKey!: string;
 
   /**
    * Field name in the menu item data set that holds sub-menu item. Defaults to
    * `'children'`.
    */
-  @Prop({ default: 'children' }) childrenKey!: string;
+  @Prop({ default: 'children' }) private childrenKey!: string;
+
+  /**
+   * Whether to add element id attribute, using the {@link idKey} field. Defaults to `false`.
+   */
+  @Prop({ default: false }) private addElementId!: boolean;
 
   /**
    * Menu item data set.
    */
-  items!: G8MenuItem[];
+  private items!: G8MenuItem[];
 
   /**
    * Menu header text. Shown in the `back` button.
    */
-  header = '';
+  private header = '';
 
   /**
    * The menu page currently being shown.
    */
-  page = [] as G8MenuItem[];
+  private page = [] as G8MenuItem[];
 
   /**
    * The coordinate where mouse was clicked.
    */
-  anchor = { x: 0, y: 0 };
+  private anchor = { x: 0, y: 0 };
 
   /**
    * A path like array of presented menu pages.
    */
-  path = [] as { header: string; items: G8MenuItem[] }[];
+  private path = [] as { header: string; items: G8MenuItem[] }[];
 
-  // noinspection JSUnusedGlobalSymbols
-  mounted(): void {
+  // noinspection JSUnusedLocalSymbols
+  private mounted(): void {
     this.$el.classList.add('g8-menu--off');
   }
 
@@ -166,7 +172,7 @@ export default class G8PopupMenu extends Vue {
   /**
    * Resizes the menu to fit content in visible page area.
    */
-  resize(): void {
+  private resize(): void {
     const el = this.$el.children[0] as HTMLDivElement;
     el.style.left = '';
     el.style.width = '';
@@ -199,7 +205,7 @@ export default class G8PopupMenu extends Vue {
    * Mouse click event handler.
    * @param evt
    */
-  clicked(evt: G8MenuItemClicked): void {
+  private clicked(evt: G8MenuItemClicked): void {
     /**
      * A menu item has been clicked.
      * @type {G8MenuItemClicked}
@@ -226,7 +232,7 @@ export default class G8PopupMenu extends Vue {
   /**
    * Go back one menu page.
    */
-  back(): void {
+  private back(): void {
     this.pop();
     this.resize();
   }
@@ -235,7 +241,7 @@ export default class G8PopupMenu extends Vue {
    * Goes to the given sub-menu page.
    * @param item
    */
-  push(item: G8MenuItem): void {
+  private push(item: G8MenuItem): void {
     this.path.push({ header: this.header, items: this.page });
     this.page = item[this.childrenKey] as G8MenuItem[];
     this.header = (item[this.labelKey] || item[this.idKey] || '') as string;
@@ -245,7 +251,7 @@ export default class G8PopupMenu extends Vue {
   /**
    * Pops the previous menu page from history.
    */
-  pop(): void {
+  private pop(): void {
     if (!this.path.length) return;
     const page = this.path.pop()!;
     this.page = page.items;

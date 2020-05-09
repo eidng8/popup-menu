@@ -1,5 +1,7 @@
 # popup-menu
 
+[![master build](https://img.shields.io/travis/com/eidng8/popup-menu?color=333&logo=travis)](https://travis-ci.com/eidng8/popup-menu) [![vulnerabilities](https://img.shields.io/snyk/vulnerabilities/github/eidng8/popup-menu?color=333&logo=snyk)](https://snyk.io/test/github/eidng8/popup-menu?targetFile=package.json) [![maintainability](https://img.shields.io/codeclimate/maintainability/eidng8/popup-menu?color=333&logo=code-climate)](https://codeclimate.com/github/eidng8/popup-menu/maintainability) [![master coverage](https://img.shields.io/coveralls/github/eidng8/popup-menu/master?color=333&logo=coveralls)](https://coveralls.io/github/eidng8/popup-menu?branch=master) [![dev build](https://img.shields.io/travis/com/eidng8/popup-menu/dev?color=333&label=dev%20build&logo=travis)](https://travis-ci.com/eidng8/popup-menu/tree/dev) [![dev coverage](https://img.shields.io/coveralls/github/eidng8/popup-menu/dev?color=333&label=dev%20coverage&logo=coveralls)](https://coveralls.io/github/eidng8/popup-menu?branch=dev)
+
 A Vue.js multi-level popup menu, using a page like navigation inside the menu container.
 
 [Demo](https://codesandbox.io/s/g8-popup-menu-demo-vq8i7?file=/src/components/HelloWorld.vue)
@@ -8,14 +10,15 @@ A Vue.js multi-level popup menu, using a page like navigation inside the menu co
 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
-| idKey | Field name in the menu item data set that holds item identifier. Defaults<br>to `'id'`. | string | 'id' |
-| labelKey | Field name in the menu item data set that holds item label. Defaults to<br>`'label'`. | string | 'label' |
-| subtitleKey | Field name in the menu item data set that holds item subtitle. Defaults to<br>`'subtitle'`. | string | 'subtitle' |
-| hintKey | Field name in the menu item data set that holds item tool tip. Defaults to<br>`'hint'`. | string | 'hint' |
-| checkerKey | Field name in the menu item data set that tells whether the item has a<br>checkbox attached. Defaults to `'checker'`. | string | 'checker' |
-| checkedKey | Field name in the menu item data set that holds item's checkbox is checked.<br>Defaults to `'checked'`. | string | 'checked' |
-| shortcutKey | Field name in the menu item data set that holds item keyboard shortcut.<br>Defaults to `'shortcut'`. | string | 'shortcut' |
-| childrenKey | Field name in the menu item data set that holds sub-menu item. Defaults to<br>`'children'`. | string | 'children' |
+| idKey | Field name in the menu item data set that holds item identifier. | string | 'id' |
+| labelKey | Field name in the menu item data set that holds item label. | string | 'label' |
+| subtitleKey | Field name in the menu item data set that holds item subtitle. | string | 'subtitle' |
+| hintKey | Field name in the menu item data set that holds item tool tip. | string | 'hint' |
+| checkerKey | Field name in the menu item data set that tells whether the item has a<br>checkbox attached. | string | 'checker' |
+| checkedKey | Field name in the menu item data set that holds item's checkbox is checked. | string | 'checked' |
+| shortcutKey | Field name in the menu item data set that holds item keyboard shortcut. | string | 'shortcut' |
+| childrenKey | Field name in the menu item data set that holds sub-menu item. | string | 'children' |
+| addElementId | Whether to add element id attribute, using the `idKey` field. | boolean | `false` |
 
 ## Slots
 
