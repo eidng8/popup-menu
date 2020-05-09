@@ -65,7 +65,7 @@ module.exports = {
       .assert.containsText('#clicked', 'item 1')
       .assert.containsText('.g8-menu--can__go-back', 'item 1')
       .click('.g8-menu--can__go-back')
-      .assert.elementNotPresent('.g8-menu--can__go-back')
+      .assert.not.elementPresent('.g8-menu--can__go-back')
       .assert.containsText('.g8-menu__item--has-child', 'item 1')
       .end();
   },

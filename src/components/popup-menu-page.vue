@@ -10,7 +10,7 @@
       class="g8-menu__item"
       v-for="(item, idx) in items"
       :key="idx"
-      :id="item[idKey]"
+      :id="addElementId && item[idKey] ? item[idKey] : undefined"
       :class="{
         'g8-menu__separator': '---' == item[labelKey],
         'g8-menu__checker': item[checkerKey],
@@ -100,6 +100,11 @@ export default class G8PopupMenuPage extends Vue {
    * `'children'`.
    */
   @Prop({ default: 'children' }) private childrenKey!: string;
+
+  /**
+   * Whether to add element id attribute, using the {@link idKey} field. Defaults to `false`.
+   */
+  @Prop({ default: false }) private addElementId!: boolean;
 
   /**
    * Menu item data set.

@@ -10,14 +10,15 @@ A Vue.js multi-level popup menu, using a page like navigation inside the menu co
 
 | Prop name | Description | Type | Default |
 | --- | --- | --- | --- |
-| idKey | Field name in the menu item data set that holds item identifier. Defaults<br>to `'id'`. | string | 'id' |
-| labelKey | Field name in the menu item data set that holds item label. Defaults to<br>`'label'`. | string | 'label' |
-| subtitleKey | Field name in the menu item data set that holds item subtitle. Defaults to<br>`'subtitle'`. | string | 'subtitle' |
-| hintKey | Field name in the menu item data set that holds item tool tip. Defaults to<br>`'hint'`. | string | 'hint' |
-| checkerKey | Field name in the menu item data set that tells whether the item has a<br>checkbox attached. Defaults to `'checker'`. | string | 'checker' |
-| checkedKey | Field name in the menu item data set that holds item's checkbox is checked.<br>Defaults to `'checked'`. | string | 'checked' |
-| shortcutKey | Field name in the menu item data set that holds item keyboard shortcut.<br>Defaults to `'shortcut'`. | string | 'shortcut' |
-| childrenKey | Field name in the menu item data set that holds sub-menu item. Defaults to<br>`'children'`. | string | 'children' |
+| idKey | Field name in the menu item data set that holds item identifier. | string | 'id' |
+| labelKey | Field name in the menu item data set that holds item label. | string | 'label' |
+| subtitleKey | Field name in the menu item data set that holds item subtitle. | string | 'subtitle' |
+| hintKey | Field name in the menu item data set that holds item tool tip. | string | 'hint' |
+| checkerKey | Field name in the menu item data set that tells whether the item has a<br>checkbox attached. | string | 'checker' |
+| checkedKey | Field name in the menu item data set that holds item's checkbox is checked. | string | 'checked' |
+| shortcutKey | Field name in the menu item data set that holds item keyboard shortcut. | string | 'shortcut' |
+| childrenKey | Field name in the menu item data set that holds sub-menu item. | string | 'children' |
+| addElementId | Whether to add element id attribute, using the `idKey` field. | boolean | `false` |
 
 ## Slots
 

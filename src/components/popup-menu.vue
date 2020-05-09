@@ -26,6 +26,7 @@
         :checker-key="checkerKey"
         :shortcut-key="shortcutKey"
         :children-key="childrenKey"
+        :add-element-id="addElementId"
         :items="page"
         @click="clicked($event)"
       >
@@ -95,6 +96,11 @@ export default class G8PopupMenu extends Vue {
    * `'children'`.
    */
   @Prop({ default: 'children' }) private childrenKey!: string;
+
+  /**
+   * Whether to add element id attribute, using the {@link idKey} field. Defaults to `false`.
+   */
+  @Prop({ default: false }) private addElementId!: boolean;
 
   /**
    * Menu item data set.

@@ -12,9 +12,9 @@
       <span id="checker">{{ indChecker }}</span>
       <span id="selected">{{ indSelected }}</span>
     </div>
-    <div>
-      <label>Dark theme</label>
-      <input type="checkbox" v-model="dark" />
+    <div class="controls">
+      <label>Dark theme<input type="checkbox" v-model="dark"/></label>
+      <label>Add Element ID<input type="checkbox" v-model="addId"/></label>
     </div>
     <div id="click-me" @contextmenu.stop.prevent="show($event)">
       Right click me
@@ -22,6 +22,7 @@
     <g8-popup-menu
       class="g8-menu"
       :class="{ 'g8--dark': dark }"
+      :add-element-id="addId"
       @open="indOpen = 'open'"
       @close="indOpen = 'close'"
       @click="indClicked = $event.data.label"
@@ -40,6 +41,8 @@ export default class App extends Vue {
   items!: G8MenuItem[];
 
   dark = true;
+
+  addId = true;
 
   indOpen = '';
   indClicked = '';
@@ -61,6 +64,7 @@ export default class App extends Vue {
     const items = [] as G8MenuItem[];
     for (let idx = 0; idx < num; idx++) {
       items.push({
+        id: `item-${prefix}-${idx}`,
         label: `item ${prefix}${idx} `,
         subtitle: `subtitle ${prefix}${idx}`,
         hint: `hint ${prefix}${idx}`,
@@ -107,5 +111,13 @@ hr {
   height: 2000px;
   display: block;
   border: solid 1px;
+}
+
+.controls {
+  display: flex;
+
+  > * {
+    margin-right: 1em;
+  }
 }
 </style>
